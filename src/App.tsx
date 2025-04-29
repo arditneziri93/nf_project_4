@@ -1,6 +1,6 @@
 import { initialColors } from "./lib/colors";
 import "./App.css";
-import Color from "./Color/Color";
+import ColorCard from "./Color/ColorCard";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <h1>Theme Creator</h1>
 
       {initialColors.map((color) => (
-        <Color key={color.id} {...color} />
+        <ColorCard key={color.id} {...color} />
       ))}
     </>
   );

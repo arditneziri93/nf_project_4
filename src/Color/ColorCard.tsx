@@ -1,7 +1,7 @@
 import { ColorType } from "../lib/colors";
-import "./Color.css";
+import "./ColorCard.css";
 
-export default function Color({ hex, contrastText, role }: ColorType) {
+export default function ColorCard({ hex, contrastText, role }: ColorType) {
   return (
     <div
       className="color-card"
