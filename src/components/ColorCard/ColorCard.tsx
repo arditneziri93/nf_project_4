@@ -2,9 +2,9 @@ import { useState } from "react";
 import { ColorType } from "../../lib/colors";
 import "./ColorCard.css";
 
-interface ColorCardProps extends ColorType {
+type ColorCardProps = ColorType & {
   onDelete: (id: string) => void;
-}
+};
 
 export default function ColorCard(props: ColorCardProps) {
   const [hasRequestedDelete, setHasRequestedDelete] = useState(false);
