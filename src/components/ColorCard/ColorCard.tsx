@@ -1,4 +1,4 @@
-import { ColorType } from "../lib/colors";
+import { ColorType } from "../../lib/colors";
 import "./ColorCard.css";
 
 export default function ColorCard({ hex, contrastText, role }: ColorType) {
