@@ -1,15 +1,11 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 type ColorInputProps = {
   initialValue?: string;
   onChange: (value: string) => void;
 };
 export default function ColorInput(props: ColorInputProps) {
-  const [color, setColor] = useState("");
-
-  useEffect(() => {
-    setColor(props.initialValue ?? "#000000");
-  }, []);
+  const [color, setColor] = useState(props.initialValue);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setColor(event.target.value);
