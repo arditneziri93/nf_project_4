@@ -1,16 +1,26 @@
 import { useState } from "react";
 import { ColorType } from "../../lib/colors";
 import "./ColorCard.css";
+import ColorForm from "../ColorForm/ColorForm";
 
 type ColorCardProps = ColorType & {
   onDelete: (id: string) => void;
+  onUpdate: (color: ColorType) => void;
 };
 
 export default function ColorCard(props: ColorCardProps) {
+  const [hasRequestedUpdate, setHasRequestedUpdate] = useState(false);
   const [hasRequestedDelete, setHasRequestedDelete] = useState(false);
 
-  function cancelDelete() {
-    setHasRequestedDelete(false);
+  function handleUpdate(newColor?: ColorType) {
+    if (hasRequestedUpdate === false) {
+      setHasRequestedUpdate(true);
+    } else {
+      if (newColor !== undefined) {
+        props.onUpdate(newColor);
+      }
+      setHasRequestedUpdate(false);
+    }
   }
 
   function handleDelete() {
@@ -19,6 +29,10 @@ export default function ColorCard(props: ColorCardProps) {
     } else {
       props.onDelete(props.id);
     }
+  }
+
+  function cancelDelete() {
+    setHasRequestedDelete(false);
   }
 
   return (
@@ -38,7 +52,24 @@ export default function ColorCard(props: ColorCardProps) {
           <button onClick={cancelDelete}>Cancel</button>
         </>
       )}
-      <button onClick={() => handleDelete()}>Delete</button>
+      {hasRequestedUpdate && (
+        <ColorForm
+          onSubmit={handleUpdate}
+          buttonText="UPDATE COLOR"
+          initialId={props.id}
+          initialRole={props.role}
+          initialHex={props.hex}
+          initialContrastText={props.contrastText}
+        />
+      )}
+      {!hasRequestedUpdate && (
+        <button onClick={() => handleDelete()}>Delete</button>
+      )}
+      {!hasRequestedDelete && (
+        <button onClick={() => handleUpdate()}>
+          {hasRequestedUpdate ? "CANCEL" : "EDIT"}
+        </button>
+      )}
     </div>
   );
 }
