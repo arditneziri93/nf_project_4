@@ -11,3 +11,25 @@
   border-radius: 4px;
   color: white;
 }
+
+.contrast-score-indicator {
+  display: inline-block;
+  padding: 2px 6px;
+  vertical-align: middle;
+  color: black!important;
+  margin-bottom: 10px;
+  border-radius: 2px,
+  
+}
+
+.contrast-score-indicator-yup {
+  background-color: lightgreen;
+}
+
+.contrast-score-indicator-kinda {
+  background-color:burlywood;
+}
+
+.contrast-score-indicator-nope {
+  background-color:lightcoral
+}
