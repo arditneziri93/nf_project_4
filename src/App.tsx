@@ -1,26 +1,33 @@
-import { ColorType, initialColors } from "./lib/colors";
 import "./App.css";
 import ColorCard from "./components/ColorCard/ColorCard";
 import ColorForm from "./components/ColorForm/ColorForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ColorType } from "./lib/color_type";
+import colorsDb from "./lib/colors_db";
 
 function App() {
-  const [colors, setColors] = useState<ColorType[]>(initialColors);
+  const [colors, setColors] = useState<ColorType[]>([]);
+
+  useEffect(() => {
+    fetchColors();
+  }, []);
+
+  function fetchColors() {
+    setColors(colorsDb.getAll());
+  }
 
   function addColor(newColor: ColorType) {
-    setColors([newColor, ...colors]);
+    colorsDb.add(newColor);
+    fetchColors();
   }
   function deleteColor(id: string) {
-    setColors(colors.filter((c) => c.id !== id));
+    colorsDb.delete(id);
+    fetchColors();
   }
 
   function updateColor(newColor: ColorType) {
-    const updatedColors = colors.map((color) =>
-      color.id === newColor.id ? newColor : color
-    );
-
-    console.log(updatedColors[0]);
-    setColors(updatedColors);
+    colorsDb.update(newColor);
+    fetchColors();
   }
 
   return (

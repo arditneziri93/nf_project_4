@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ColorType } from "../../lib/colors";
 import "./ColorCard.css";
 import ColorForm from "../ColorForm/ColorForm";
+import { ColorType } from "../../lib/color_type";
 
 type ColorCardProps = ColorType & {
   onDelete: (id: string) => void;
