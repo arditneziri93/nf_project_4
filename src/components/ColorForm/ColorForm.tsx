@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import ColorInput from "./ColorInput";
-import { ColorType } from "../../lib/colors";
 import { v4 as uuidv4 } from "uuid";
+import { ColorType } from "../../lib/color_type";
 
 type ColorFormProps = {
   initialId?: string;
