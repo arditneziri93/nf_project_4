@@ -11,6 +11,7 @@ type ColorCardProps = ColorType & {
 export default function ColorCard(props: ColorCardProps) {
   const [hasRequestedUpdate, setHasRequestedUpdate] = useState(false);
   const [hasRequestedDelete, setHasRequestedDelete] = useState(false);
+  const [hasCopied, setHasCopied] = useState(false);
 
   function handleUpdate(newColor?: ColorType) {
     if (hasRequestedUpdate === false) {
@@ -35,6 +36,12 @@ export default function ColorCard(props: ColorCardProps) {
     setHasRequestedDelete(false);
   }
 
+  function handleCopy() {
+    navigator.clipboard.writeText(props.hex);
+    setHasCopied(true);
+    setTimeout(() => setHasCopied(false), 3000);
+  }
+
   return (
     <div
       className="color-card"
@@ -44,6 +51,10 @@ export default function ColorCard(props: ColorCardProps) {
       }}
     >
       <h3 className="color-card-headline">{props.hex}</h3>
+      <button onClick={handleCopy}>
+        {" "}
+        {hasCopied ? "SUCCESSFULLY COPIED!" : "COPY"}
+      </button>
       <h4>{props.role}</h4>
       <p>contrast: {props.contrastText}</p>
       {hasRequestedDelete && (
